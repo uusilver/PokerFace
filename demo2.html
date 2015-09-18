@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <script src="js/demo2.js"></script>
+    <style type="text/css">
+        .boom{
+            width: 50px;
+            height: 50px;
+            border: solid 1px red;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        .pai
+        {
+            width: 50px;
+            height: 100px;
+            border: solid 1px red;
+            margin-left: 3px;
+            float: left;
+        }
+        .new
+        {
+            border: solid 1px blue;
+        }
+        .nu
+        {
+            text-align:center;
+            font-size:24px;
+            margin-top:25px;
+        }
+    </style>
+</head>
+<body>
+<!-- <div class="boom"></div>-->
+<input type="button" value="开始" onclick="CreatCompeleteCard()" />
+<input type="button" value="摸牌" onclick="Start()" />
+<br/>
+底牌：<div id="old"></div>
+<div style="clear: both"></div>
+<hr />
+我摸到的牌：<div id="new"></div>
+</body>
+</html>

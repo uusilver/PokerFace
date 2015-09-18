@@ -1,0 +1,66 @@
+/**
+ * Created with JetBrains WebStorm.
+ * User: vali
+ * Date: 15-9-15
+ * Time: 下午4:26
+ * To change this template use File | Settings | File Templates.
+ */
+* {margin: 0; padding: 0;}
+
+body {
+    background: #00a651;
+}
+
+.card {
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    width: 150px;
+    height: 220px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+.card p {
+    text-align: center;
+    font: 100px/220px Georgia, Times New Roman, serif;
+}
+
+
+.suitdiamonds:before, .suitdiamonds:after {
+    content: "♦";
+    color: #ff0000;
+}
+
+.suithearts:before, .suithearts:after {
+    content: "♥";
+    color: #ff0000;
+}
+
+.suitclubs:before, .suitclubs:after {
+    content: "♣";
+    color: #000;
+}
+
+.suitspades:before, .suitspades:after {
+    content: "♠";
+    color: #000;
+}
+
+div[class*='suit']:before {
+    position: absolute;
+    font-size: 35px;
+    left: 5px;
+    top: 5px;
+}
+
+div[class*='suit']:after {
+    position: absolute;
+    font-size: 35px;
+    right: 5px;
+    bottom: 5px;
+}
+
+
+
