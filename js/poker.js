@@ -81,9 +81,9 @@ function show4Play(){
         }else if(RandomCards[i].type==3){
             html+="<div class='card suithearts'><p>"+RandomCards[i].number+"</p></div>";
         }else if(RandomCards[i].type==4){
-            html+="<div class='card'><p>☺</p></div>";
-        }else if(RandomCards[i].type==5){
             html+="<div class='card'><p>☻</p></div>";
+        }else if(RandomCards[i].type==5){
+            html+="<div class='card'><p>☺</p></div>";
         }
 
     }
