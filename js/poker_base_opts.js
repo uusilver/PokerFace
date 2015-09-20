@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-//Constructor for card
+//卡片构造器
 var Cards = (function () {
     var Card = function (number, type) {
         this.number = number;
@@ -29,19 +29,23 @@ function CreatCompeleteCard() {
     var arr = [];
     for (var i = 0; i <= 13; i++) {
         if (i == 0) {
-            arr[0] = new Cards(i, 4);
-            arr[1] = new Cards(i, 5);
+            //初始化大鬼，小鬼，并且填入初始化数组中的0位和1位
+            arr[0] = new Cards(i, 4);//[0,4]
+            arr[1] = new Cards(i, 5);//[1,5]
         } else {
             for (var j = 0; j <= 3; j++) {
+                //初始化其余的牌数，放入数组中去
+                //从数组的第三位(下标位2开始，0，1已经被大鬼和小鬼占去)，每次初始化的是同一牌号下的同花色的牌
+                //例如初始化［2，0］，代表♠️2，之后是♣️2，♦️2和♥️2，然后初始化3...直到K
                 arr[index] = new Cards(i, j);
                 index++;
             }
         }
     }
     RadomCards = SortCards(arr);
-    Show();//在页面上显示当前的牌
+    Show();
 }
-//洗牌
+//洗牌，一个随机种子产生来保证每次的顺序在一定意义上的不重复
 function SortCards(arr) {
     arr.sort(function (a, b) {
         return 0.5 - Math.random();
