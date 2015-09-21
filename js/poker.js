@@ -9,9 +9,14 @@
 $(function() {
     //点击重新洗牌按钮后的动作
     CreatCompeleteCard();
-
+    $("#washCards").click(function(){window.location.reload();});
     //点击摸牌
     $("#getCards").click(function(){Start()});
+
+    $("div").on("click",function(){
+            alert("123");
+
+    });
 
 });
 
