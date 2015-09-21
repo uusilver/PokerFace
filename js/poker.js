@@ -8,7 +8,10 @@
 //页面函数入口
 $(function() {
     //点击重新洗牌按钮后的动作
-   $("#washCards").click(function(){CreatCompeleteCard()});
+    CreatCompeleteCard();
+
+    //点击摸牌
+    $("#getCards").click(function(){Start()});
 
 });
 
@@ -57,8 +60,53 @@ function SortCards(arr) {
     return arr;
 }
 
+//摸牌方法
+function GetCards(CardObj) {
+    var k = InCardsIndex(MyCards, CardObj);//考虑下插入的位置
+    MyCards.splice(k, 0, CardObj); // 插入形成新的顺序
+}
+/*【获取牌应该插入的位置】
+ *arr:当前手里的牌
+ *obj:新摸到的牌
+ */
+function InCardsIndex(arr, obj) {
+    var len = arr && arr.length || 0;
+    if (len == 0) {
+        return 0;
+    }else if (len == 1) {
+        if (obj.number >= arr[0].number) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        var backi = -1;
+        for (var i = 0; i < len; i++) {
+
+            if (obj.number <= arr[i].number) {
+                backi = i;
+                break;
+            }
+        }
+        if (backi == -1) {
+            backi = len;
+        }
+        return backi;
+    }
+}
+
+function Start() {//摸牌方法，一次摸一张
+    if (RandomCards.length > 0) {
+        GetCards(RandomCards.shift());
+        show4Play();
+    } else {
+        alert("没有了");
+    }
+}
+
 function show4Play(){
     var lenOld = RandomCards.length;
+    var lenNew = MyCards.length;
     var html = "";
     for (var i = 0; i < lenOld; i++) {
         //花色0-黑桃 1-梅花 2-方块  3-红桃 4-大鬼  5-小鬼
@@ -68,7 +116,7 @@ function show4Play(){
             RandomCards[i].number=="Q";
         }else if(RandomCards[i].number==13){
             RandomCards[i].number=="K";
-        }else if(RandomCards[i].number==1){
+        }else if(RandomCards[i].number===1){
             RandomCards[i].number=="A";
         }
 
@@ -87,7 +135,37 @@ function show4Play(){
         }
 
     }
-    $(".hand").html(html);
+    //$("#whole").html(html);
+    html="";
+    //刷新手牌信息
+    for (var i = 0; i < lenNew; i++) {
+        //花色0-黑桃 1-梅花 2-方块  3-红桃 4-大鬼  5-小鬼
+        if(MyCards[i].number==11){
+            MyCards[i].number=="J";
+        }else if(MyCards[i].number==12){
+            MyCards[i].number=="Q";
+        }else if(MyCards[i].number==13){
+            MyCards[i].number=="K";
+        }else if(MyCards[i].number==1){
+            MyCards[i].number=="A";
+        }
+
+        if(MyCards[i].type==0){
+            html+="<div class='card suitspades'><p>"+MyCards[i].number+"</p></div>";
+        }else if(MyCards[i].type==1){
+            html+="<div class='card suitclubs'><p>"+MyCards[i].number+"</p></div>";
+        }else if(MyCards[i].type==2){
+            html+="<div class='card suitdiamonds'><p>"+MyCards[i].number+"</p></div>";
+        }else if(MyCards[i].type==3){
+            html+="<div class='card suithearts'><p>"+MyCards[i].number+"</p></div>";
+        }else if(MyCards[i].type==4){
+            html+="<div class='card'><p>☻</p></div>";
+        }else if(MyCards[i].type==5){
+            html+="<div class='card'><p>☺</p></div>";
+        }
+
+    }
+    $("#mine").html(html);
 
 }
 
