@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>创建房间</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+
     <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <script type="text/javascript" src="js/jquery.zclip.js"></script>
     <script src="js/create_room.js"></script>
 </head>
@@ -14,8 +18,9 @@
     .copy-tips-wrap{padding:10px 20px;text-align:center;border:1px solid #F4D9A6;background-color:#FFFDEE;font-size:14px;}
 </style>
 <div class="line">
-    <input type="text" id="roomname" value="" />
-    <button class="copy-input">点击复制房间号</button>
+    <input type="text" id="roomname" value="" class="form-control"/>
+    <button class="btn btn-default" id="copy-input">点击复制房间号</button>
 </div>
+</body>
 </body>
 </html>

@@ -3,7 +3,7 @@
  */
 $(function(){
     $("#roomname").val("room123");
-    $(".copy-input").zclip({
+    $("#copy-input").zclip({
         path: "js/ZeroClipboard.swf",
         copy: function(){
             return $("#roomname").val();
