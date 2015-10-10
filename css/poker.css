@@ -27,7 +27,6 @@ body {
     font: 100px/220px Georgia, Times New Roman, serif;
 }
 
-
 .suitdiamonds:before, .suitdiamonds:after {
     content: "♦";
     color: #ff0000;
