@@ -128,9 +128,7 @@ function show4Play(){
     var html = "";
     var types = ["suitspades", "suitclubs", "suitdiamonds", "suithearts", "", ""];
     for (var i = 0; i < lenOld; i++) {
-<<<<<<< HEAD
         html+="<div class='card "+types[RandomCards[i].type]+"'><p>"+RandomCards[i].text+"</p></div>";
-=======
         //花色0-黑桃 1-梅花 2-方块  3-红桃 4-大鬼  5-小鬼
         if(RandomCards[i].number==11){
             RandomCards[i].number=="J";
@@ -155,8 +153,6 @@ function show4Play(){
         }else if(RandomCards[i].type==5){
             html+="<div class='card'><p>☺</p></div>";
         }
-
->>>>>>> d9fa075cc9ea0ed748ecdcbd46e6db8fc16a86c5
     }
     //$("#whole").html(html);
     html="";
