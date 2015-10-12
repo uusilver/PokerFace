@@ -60,6 +60,9 @@ div[class*='suit']:after {
     right: 5px;
     bottom: 5px;
 }
+.selected{
+    background-color: red;
+}
 
 
 

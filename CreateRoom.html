@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建房间</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/jquery.zclip.js"></script>
+    <script src="js/create_room.js"></script>
+</head>
+<style type="text/css">
+    .line{position:fixed;left:40%;top:50%;width: 166px}
+    /* 复制提示 */
+    .copy-tips{position:fixed;z-index:999;bottom:50%;left:50%;margin:0 0 -20px -80px;background-color:rgba(0, 0, 0, 0.2);filter:progid:DXImageTransform.Microsoft.Gradient(startColorstr=#30000000, endColorstr=#30000000);padding:6px;}
+    .copy-tips-wrap{padding:10px 20px;text-align:center;border:1px solid #F4D9A6;background-color:#FFFDEE;font-size:14px;}
+</style>
+<div class="line">
+    <input type="text" id="roomname" value="" class="form-control" readonly/>
+    <hr style="height:1px;border:none;border-top:1px solid #555555;" />
+    <button class="btn btn-primary" id="copy-input">创建房间并复制房间号</button>
+</div>
+</body>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人战绩</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+    <script>
+        //左侧Javascript代码
+        $(function () {
+            $('#scoreContainer').highcharts({
+                title: {
+                    text: '个人成绩曲线图',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '来自: 南京特伯曼德数据中心',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['1月', '2月', '3月', '4月', '5月', '6月','7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis: {
+                    title: {
+                        text: '名次'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '名'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: '张三',
+                    data: [7, 6, 9, 14, 18, 21, 25, 26, 23, 18, 13, 9]
+                }]
+            });
+        });
+
+        $(function () {
+            $('#winContainer').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '个人统计'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    data: [
+                        {
+                            name:'胜利',
+                            y:80.0,
+                            sliced:true,
+                            selected:true
+                        },
+                        ['失败',       15],
+                        ['逃跑',   5]
+                    ]
+                }]
+            });
+        });
+    </script>
+</head>
+<style>
+
+</style>
+<body>
+<div id="scoreContainer" style="min-width:700px;height:400px"></div>
+<div id="winContainer" style="min-width:700px;height:400px"></div>
+</body>
+</html>
