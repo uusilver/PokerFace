@@ -58,6 +58,12 @@ function CreatCompeleteCard() {
     }
     RadomCards = SortCards(arr);
     Show4Play(null, '0');
+
+    //初始化有两位玩家
+    addBanker();
+    addBanker();
+    //发牌
+    DealCard();
 }
 
 //洗牌，一个随机种子产生来保证每次的顺序在一定意义上的不重复
@@ -70,31 +76,36 @@ function SortCards(arr) {
 
 //显示所有牌
 function Show4Play(newCard, index) {
-    var lenOld = RadomCards.length;
-    var lenNew = MyCards[index].length;
-    var html = "";
-    for (var i = 0; i < lenOld; i++) {
-        html += drawCardByType(RadomCards[i], "pai");
-    }
-    document.getElementById("old").innerHTML=html;
-    html = "";
-    for (var i = 0; i < lenNew; i++) {
-        if(MyCards[index][i] == newCard){
-            html += drawCardByType(MyCards[index][i], "pai new highlight");
-        }else{
-            html += drawCardByType(MyCards[index][i], "pai new");
+    document.getElementById("old").innerHTML = "";
+    for (var i = 0; i < RadomCards.length; i++) {
+        var node = drawCardByType(RadomCards[i], "pai");
+        document.getElementById("old").appendChild(node);
+        if(i>0){
+            node.style.position ="absolute";
+            if(node.previousElementSibling.style.left=='' || node.previousElementSibling.lastChild.style.left==null){
+                node.previousElementSibling.style.left = "0px";
+            }
+            node.style.left = (parseInt(node.previousSibling.style.left)+20)+"px";
         }
     }
-    var divID = "new"+index;
-    document.getElementById(divID).innerHTML=html;
+
+    document.getElementById("new"+index).innerHTML = "";
+    for (var i = 0; i < MyCards[index].length; i++) {
+        if(newCard!=null && newCard.id==MyCards[index][i].id){
+            document.getElementById("new"+index).appendChild(drawCardByType(MyCards[index][i], "pai new highlight"));
+        }else{
+            document.getElementById("new"+index).appendChild(drawCardByType(MyCards[index][i], "pai new"));
+        }
+    }
 }
 
 //根据不同花式显示
 function drawCardByType(card, className) {
-    var types = ["suitspades", "suitclubs", "suitdiamonds", "suithearts", " ", " "];
-    var html = "";
-    var cardText = "";
+    var newNode = document.createElement("div");
+    newNode.id = card.id;
 
+    var types = ["suitspades", "suitclubs", "suitdiamonds", "suithearts", " ", " "];
+    var cardText = "";
     if (card.number == 0) {
         if(card.type == '4'){
             cardText = "☻";
@@ -112,20 +123,25 @@ function drawCardByType(card, className) {
     } else {
         cardText = card.number.toString();
     }
-
-    //打出的牌
-    if (className == "pai new highlight") {
-        html = "<div id='" + card.id + "' class='pai new highlight " + types[card.type] + "' onclick='chooseCard(this)'><p>" + cardText + "</p></div>";
-    }
-    //摸到的牌
-    else if (className == "pai new") {
-        html = "<div id='" + card.id + "' class='pai new " + types[card.type] + "' onclick='chooseCard(this)'><p>" + cardText + "</p></div>";
+    //摸到的牌和打出的牌
+    if (className == "pai new highlight" || className == "pai new") {
+        newNode.className = className + " " + types[card.type];
+        newNode.onclick = function(){
+            chooseCard(this);
+        };
+        var pNode = document.createElement("p");
+        pNode.textContent = cardText;
+        newNode.appendChild(pNode);
     }
     //底牌
     else {
-        html = "<div id='" + card.id + "' class='pai " + types[card.type] + "' class='pai " + types[card.type] + "'><p>" + cardText + "</p></div>";
+        newNode.className = "pai blank";
+        var imgNode = document.createElement("img");
+        imgNode.src = "img/poker-back.png";
+        imgNode.className = "img";
+        newNode.appendChild(imgNode);
     }
-    return html;
+    return newNode;
 }
 
 /*==================== 发牌 ====================*/
@@ -144,27 +160,29 @@ function addBanker(){
         alert("最多只能6位玩家！");
     }else{
         var newDivNode = "<div id=\"player"+players+"\">"
-            +"<span>玩家 - "+(players+1)+"：</span><input type=\"button\" class=\"button disabled\" id=\"drawCard"+players+"\" value=\"摸牌\" onclick=\"DrawCards('"+players+"')\"  disabled/>"
+            +"<span>玩家 - "+(players+1)+"：</span>"
+            +"<input type=\"button\" class=\"button disabled\" id=\"drawCard"+players+"\" value=\"摸牌\" onclick=\"DrawCards('"+players+"')\"  disabled/>"
             +"<input type=\"button\" class=\"button disabled\" id=\"showCard"+players+"\" value=\"出牌\" onclick=\"ShowHand('"+players+"')\" disabled/>"
             +"<input type=\"button\" class=\"button disabled\" id=\"noShowCard"+players+"\" value=\"不出\" onclick=\"NoShowHand('"+players+"')\" disabled/>"
             +"<br/>"
             +"<div id=\"new"+players+"\" class=\"div card\"></div>"
             +"<div class=\"div clear\"></div>"
-            +"<hr />"
+            //+"<hr/>"
             +"</div>";
-        document.getElementById("playerDIVs").innerHTML += newDivNode;
+        var playGroundName;
+        if(players%2 == 1){
+            playGroundName ="leftPlayground";
+        }else{
+            playGroundName ="rightPlayground";
+        }
+
+        document.getElementById(playGroundName).innerHTML += newDivNode;
         tokenControl = tokenControl.concat(players);
         players++;
-        var playerDivNodes = document.getElementById("playerDIVs").children;
-        if(playerDivNodes!=null && playerDivNodes.length>0){
-            for(var i=0; i<playerDivNodes.length; i++){
-                if(i==(playerDivNodes.length-1) && i%2 == 0){
-                    playerDivNodes[i].style.cssText = "width:100%";
-                }else{
-                    playerDivNodes[i].style.cssText = "width:50%";
-                }
-            }
-        }
+
+        document.getElementById("leftPlayground").style.height = 150*parseInt(players/2)+"px";
+        document.getElementById("playground").style.height = 150*parseInt(players/2)+"px";
+        document.getElementById("rightPlayground").style.height = 150*parseInt(players/2)+"px";
     }
 }
 
@@ -243,8 +261,6 @@ function ShowHand(index) {
                 shownHand.push.apply(shownHand, currentHandToBeProcessed);
                 currentHand = null;
                 currentHand = currentHandToBeProcessed;
-                //根据情况决定是否要清空所有出牌
-                //document.getElementById("public").innerHTML = "";
                 //将已出牌显示在出牌区域
                 for(var i=0; i<currentHandNodesToBeProcessed.length; i++){
                     var nodeTobeProcessed = currentHandNodesToBeProcessed[i];
@@ -266,7 +282,6 @@ function ShowHand(index) {
                     tokenControl = preTokenControl.slice(sliceIndex);
                 }
                 tokenControl = tokenControl.concat(preTokenControl.slice(0,sliceIndex));
-                //alert("preTokenControl:"+preTokenControl.join(",")+" / tokenControl:"+tokenControl.join(","));
 
                 WinThisRound(index);
 
@@ -291,6 +306,8 @@ function WinThisRound(index){
     //判断是否到达本轮最后一位，若是，决定出本轮当胜者，重新开始新一轮，摸牌
     if(index==tokenControl[tokenControl.length-1]){
         alert("一局结束，玩家［"+token+"］获胜，清空本局结果。");
+        //清空所有出牌
+        document.getElementById("public").innerHTML = "";
 
         DisEnablePlayer("enable", token, "drawCard");
         DisEnablePlayer("disable", token, "showCard");
@@ -302,11 +319,13 @@ function WinThisRound(index){
         DisEnablePlayer("enable", nextIndex, "showCard");
         DisEnablePlayer("enable", nextIndex, "noShowCard");
     }
+    if(MyCards[index].length==0){
+        alert("玩家["+index+"]赢了！");
+    }
 }
 
 function CompareCards(curHand){
     var compareResult = false;
-    //alert("preHand:"+preHand.join(",")+"/curHand:"+curHand.join(","));
     if(preHand==null || preHand.length==0) {
         compareResult = true;
     } else {
@@ -340,7 +359,6 @@ function CompareCards(curHand){
             }
         }
     }
-    //alert("compareResult:"+compareResult);
     return compareResult;
 }
 /*==================== 公共方法 ====================*/
@@ -529,7 +547,6 @@ function ValidateInlineQueue(arr){
                     }else if(breakCount == 0 && parseInt(arr[i]) - parseInt(preValue) == 3){
                         breakCount = breakCount+3;
                     }else{
-                        //alert("validateInlineQueue:[" + cardsNumberStr + "] 是 null4-"+breakCount+"/"+arr[i]+"/"+preValue);
                         return null;
                     }
                     preValue = arr[i];
@@ -557,7 +574,6 @@ function ValidateInlineQueue(arr){
         alert("validateInlineQueue:[" + cardsNumberStr + "] 是 连牌，"+returnCode+"/"+returnMax);
         return [arr.length , returnCode,returnMax];
     } else {
-        //alert("validateInlineQueue:[" + cardsNumberStr + "] 是 null");
         return null;
     }
 }
@@ -607,7 +623,6 @@ function ValidateBombQueue(arr){
         alert("validateBombQueue:[" + cardsNumberStr + "] 是 炸弹，"+returnCode+"/"+returnMax);
         return [arr.length, 0,returnMax];
     } else {
-        //alert("validateBombQueue:[" + cardsNumberStr + "] 是 null");
         return null;
     }
 }

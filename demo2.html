@@ -3,12 +3,12 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <link href="css/poker_base_opts.css" rel="stylesheet">
+    <title>PokerFace</title>
     <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
     <script src="js/poker_base_opts.js"></script>
 </head>
 
 <body onload="CreatCompeleteCard()">
-    <!-- <div class="boom"></div>-->
     <div>
         <!--底牌区域-->
         <span>底牌：</span><input type="button" class="button" value="洗牌" onclick="CreatCompeleteCard()" />
@@ -19,27 +19,25 @@
         <div class="div clear"></div>
         <hr />
     </div>
-    <div id="playerDIVs">
-        <!--玩家一区域-->
-        <div id="player0">
-            <span>玩家 - 1：</span><input type="button" class="button blue" id="drawCard0" value="摸牌" onclick="DrawCards('0')" />
-            <input type="button" class="button disabled" id="showCard0" value="出牌" onclick="ShowHand('0')" disabled/>
-            <input type="button" class="button disabled" id="noShowCard0" value="不出" onclick="NoShowHand('0')" disabled/>
-            <br/>
-            <div id="new0" class="div card"></div>
-            <div class="div clear"></div>
-            <hr />
-        </div>
+    <!--左边玩家区域-->
+    <div id="leftPlayground" class="div side"></div>
+    <!--出牌区域-->
+    <div id="playground" class="div middle">
+        <span>出牌：</span>
+        <br/>
+        <div id="public" class="div card"></div>
+        <div class="div clear"></div>
     </div>
-    <div>
-        <!--出牌区域-->
-        <div id="playground">
-            <span>出牌：</span>
-            <br/>
-            <div id="public" class="div card"></div>
-            <div class="div clear"></div>
-            <hr />
-        </div>
+    <!--右边玩家区域-->
+    <div id="rightPlayground" class="div side"></div>
+    <!--玩家自己区域-->
+    <div id="selfPlayground" class="div bottom">
+        <span>自己</span><input type="button" class="button blue" id="drawCard0" value="摸牌" onclick="DrawCards('0')" />
+        <input type="button" class="button disabled" id="showCard0" value="出牌" onclick="ShowHand('0')" disabled/>
+        <input type="button" class="button disabled" id="noShowCard0" value="不出" onclick="NoShowHand('0')" disabled/>
+        <br/>
+        <div id="new0" class="div card"></div>
+        <div class="div clear"></div>
     </div>
 </body>
 </html>

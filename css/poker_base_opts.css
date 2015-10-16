@@ -15,8 +15,27 @@ span{
 }
 div{
     width: 100%;
+    height: 150px;
     display: block;
     float: left;
+}
+.side{
+    width: 28%;
+    border-bottom: solid 1px white;
+    background: cadetblue;
+}
+.bottom{
+    width: 100%;
+    border-bottom: solid 1px white;
+    background: cadetblue;
+    margin-outside: 1px;
+    text-align:center;
+}
+.middle{
+    width: 44%;
+    border-bottom: solid 1px white;
+    background: lightgoldenrodyellow;
+    text-align:center;
 }
 .clear{
     clear: both;
@@ -36,6 +55,16 @@ div{
     left: 5px;
 }
 
+.img {
+    float: left;
+    position: relative;
+    border-radius: 5px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    width: 40px;
+    height: 60px;
+}
+
 .pai {
     float: left;
     position: relative;
@@ -51,13 +80,16 @@ div{
     margin-bottom: 3px;
     border: solid 1px red;
 }
+.blank{
+    border: solid 1px white;
+}
 .pai p {
      text-align: center;
      font: 15px/60px Arial, sans-serif;
  }
 .new {
-    width: 60px;
-    height: 90px;
+    width: 50px;
+    height: 75px;
     border: solid 1px blue;
 }
 .highlight{
@@ -69,8 +101,8 @@ div{
     font: 30px/66px Arial, sans-serif;
 }
 .bold{
-    width: 66px;
-    height: 99px;
+    width: 60px;
+    height: 90px;
     border: solid 2px red;
 }
 
